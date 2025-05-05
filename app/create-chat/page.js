@@ -1,11 +1,9 @@
-//overview of user's group chats
 "use client";
 
-import UserSearch from "../components/UserSearch";
 import ChatCreation from "../components/ChatCreation";
 import { useAuth } from "../context/auth"; // Your auth context
 
-const ChatsPage = () => {
+const CreateChat = () => {
   const { currentUser } = useAuth();
 
   if (!currentUser) {
@@ -20,4 +18,4 @@ const ChatsPage = () => {
   );
 };
 
-export default ChatsPage;
+export default CreateChat;

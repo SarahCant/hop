@@ -7,8 +7,8 @@ export default function BottomMenu() {
   const { currentUser } = useAuth();
   console.log(currentUser);
   return (
-    <section>
-      <Link href="/chats">Opret chat</Link>
+    <section className="absolute inset-x-0 bottom-10">
+      <Link href="/create-chat">Opret chat</Link>
         <Link href="/">Alle chats</Link>
         {currentUser === null && (
           <Fragment>

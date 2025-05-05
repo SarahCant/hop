@@ -87,7 +87,7 @@ export async function findUserByEmail(email) {
     // after building members:
 console.log("members:", members);
   
-    // Create chat object in /chats
+    // Create chat object in {uid}/chats
     await set(chatRef, {
       name: groupName,
       members: members,
@@ -95,13 +95,13 @@ console.log("members:", members);
       messages: {}
     });
 
-    // Now update each user's /users/{uid}/chats/{chatId}
+    //update each {uid}/chats/{chatId}
     const updates = {};
 
       // after building updates:
 console.log("updates:", updates);
   
-    // Add chat reference under each user's chats
+    //ref under each {uid}/chats/{chatId}
     Object.keys(members).forEach((uid) => {
       updates[`users/${uid}/chats/${chatId}`] = {
         name: groupName,
