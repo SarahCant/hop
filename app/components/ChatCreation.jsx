@@ -11,7 +11,7 @@ export default function ChatCreation({ currentUser }) {
   const [groupName, setGroupName] = useState("");
 
   const addUser = (user) => {
-    // Prevent adding self or duplicates
+    //prevent adding self or duplicates
     if (
       user.uid === currentUser.uid ||
       selected.some((u) => u.uid === user.uid)
@@ -32,41 +32,45 @@ export default function ChatCreation({ currentUser }) {
       groupName
     );
 
-    // Reset state
+    //reset state
     setSelected([]);
     setGroupName("");
 
-    // Navigate to the new chat
+    //navigate to the new chat
     router.push(`/chat/${chatId}`);
   };
 
   return (
-    <div className="space-y-4 max-w-md mx-auto">
-      <input
-        className="border p-2 rounded w-full"
-        type="text"
-        placeholder="Gruppenavn*"
-        value={groupName}
-        onChange={(e) => setGroupName(e.target.value)}
-        required
-      />
+    <div>
+      <section className="flex flex-col gap-8">
+        {/* input group name */}
+        <section className="flex flex-col pt-4">
+          <label>Gruppenavn:</label>
+          <input
+            className="input"
+            type="text"
+            placeholder="Gruppenavn..."
+            value={groupName}
+            onChange={(e) => setGroupName(e.target.value)}
+            required
+          />
+        </section>
 
-      <UserSearch
-        currentUser={currentUser}
-        selectedUsers={selected}
-        onAdd={addUser}
-      />
+        {/* user search */}
+        <UserSearch
+          currentUser={currentUser}
+          selectedUsers={selected}
+          onAdd={addUser}
+        />
+      </section>
 
-      {selected.length > 0 && (
+      {/* {selected.length > 0 && (
         <ul className="list-disc pl-5">
           {selected.map((u) => (
             <li key={u.uid} className="flex justify-between">
-              {u.username} ({u.email})
-              <button
-                className="text-red-600 ml-2"
-                onClick={() => removeUser(u.uid)}
-              >
-                Remove
+              {u.username}  ({u.email})
+              <button onClick={() => removeUser(u.uid)}>
+                X
               </button>
             </li>
           ))}
@@ -79,6 +83,31 @@ export default function ChatCreation({ currentUser }) {
         onClick={handleCreate}
       >
         Create Chat
+      </button> */}
+
+{     selected.length > 0 && (
+        <ul className="divide-y divide-[var(--gray)]">
+          {selected.map((u) => (
+            <li key={u.uid} className="flex justify-between p-2">
+              <div className="flex flex-col">
+                <p className="leading-tight"> {u.username}</p>
+                <p className="leading-snug"> {u.email}</p>
+              </div>
+              
+              <button className="hover:text-[var(--red)] transition-colors" onClick={() => removeUser(u.uid)}>
+                X
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <button
+        className="cta"
+        disabled={!groupName || selected.length === 0}
+        onClick={handleCreate}
+      >
+        OPRET CHAT
       </button>
     </div>
   );

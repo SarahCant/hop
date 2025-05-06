@@ -41,7 +41,7 @@ export default function ChatOverview() {
 
   return (
     <div>
-      <h1>Alle chats</h1>
+      <h1 className="text-center">Alle chats</h1>
 
     
       <section className="max-w-md mx-auto divide-y">

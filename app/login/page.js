@@ -23,9 +23,9 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-[var(--blue)]/25 h-screen pt-20">
+    <div className="bg-[var(--cta)]/45 h-screen pt-20">
       <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
-        <h1 className="-mt-3 mb-4">Log ind</h1>
+        <h1 className="-mt-3 mb-4 text-center">Log ind</h1>
  
         {/* input fields */}
         <form onSubmit={onSubmit}>

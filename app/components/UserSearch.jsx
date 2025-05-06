@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import { findUserByEmail } from "../firebase";
 import { searchUsersByEmailPrefix } from "../firebase";
+import React from "react";
 
 /* const UserSearch = ({ onUserFound }) => {
   const [email, setEmail] = useState("");
@@ -77,38 +78,44 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
     }, [term, currentUser.uid, selectedUsers]);
   
     return (
-      <div className="space-y-1">
+      <div>
+        <section>
+          <p>Tilføj medlemmer:</p>
         <input
-          className="border rounded p-2 w-full"
+          className="input w-full"
           type="text"
           placeholder="Søg efter mail..."
           value={term}
           onChange={(e) => setTerm(e.target.value)}
         />
-  
-        {loading && <div>Loading…</div>}
-  
+     </section>
+        {loading && <div>Indlæser...</div>}
+
         {!loading && suggestions.length > 0 && (
-          <ul className="border rounded shadow-sm max-h-40 overflow-auto">
-            {suggestions.map((user) => (
-              <li
-                key={user.uid}
-                className="flex justify-between items-center px-2 py-1 hover:bg-gray-100"
-              >
-                <span>
-                  {user.username} ({user.email})
-                </span>
+          <ul className="bg-[var(--gray)] w-88 -mt-2 px-3">
+            {suggestions.map((user, index) => (
+              <React.Fragment key={user.uid}>
+                {index > 0 && (
+                <div className="w-[80%] mx-auto border-t border-gray-500 my-1" />
+                )}
+              <li className="flex justify-between items-center px-2 py-1">
+                <div className="my-2">
+                  <p className="!text-lg">{user.username}</p>
+                  <p className="!text-xs text-gray-500 -mt-1">{user.email}</p>
+                </div>
+
                 <button
-                  className="text-sm bg-blue-600 text-white px-2 py-1 rounded"
+                  className="cta text-xs !bg-[var(--green)]"
                   onClick={() => {
                     onAdd(user);
                     setTerm("");
                     setSuggestions([]);
                   }}
                 >
-                  Add
+                TILFØJ
                 </button>
               </li>
+              </React.Fragment>
             ))}
           </ul>
         )}
