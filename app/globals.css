@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root {
+  --bg: #FEFDFF;
+  --cta: #f5c518;
+  --red: #ed2424;
+  --purple: #9a72dd;
+  --blue: #0081d7;
+  --green: #55b77c;
+  --gray: #F2F4F6;
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@import url("https://use.typekit.net/xyx5wta.css");
+@import url("https://use.typekit.net/xyx5wta.css");
+
+/* FONTS */
+p, h2, h3 {
+  font-family: "verdana", sans-serif;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+h1 {
+/*   font-family: "zeitung", sans-serif;
+  font-weight: 700; */
+  font-family: "verdana", sans-serif;
+  text-shadow: 0 0.5px 0.8px currentColor, 0 0.5px 0.8px currentColor;
+  font-size: 1.9rem;
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}  */
+h2 {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+p {
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: 0.85rem;
+/*   line-height: 1.75rem; */
+}
+
+/* INPUT FIELDS */
+.input {
+  background-color: var(--gray);
+  border-radius: 20px;
+  padding: 0.55rem;
+  padding-left: 10px;
+  margin-left: -0.3em;
+
+}
+
+/* CTA */
+.cta {
+  background-color: #f5c518;
+  padding: 0.5rem 2rem;
+  font-family: "verdana", sans-serif;
+  color: var(--bg);
+  border-radius: 40px;
+  text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
+  letter-spacing: 0.03em;
+  
+
+}
