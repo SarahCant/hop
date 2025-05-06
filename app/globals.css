@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* ROOT */
 :root {
   --bg: #FEFDFF;
   --cta: #f5c518;
@@ -11,23 +12,27 @@
 
 }
 
+body {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+/* FONTS */
 @import url("https://use.typekit.net/xyx5wta.css");
 @import url("https://use.typekit.net/xyx5wta.css");
 
-/* FONTS */
 p, h2, h3 {
   font-family: "verdana", sans-serif;
   font-style: normal;
 }
 
 h1 {
-/*   font-family: "zeitung", sans-serif;
-  font-weight: 700; */
   font-family: "verdana", sans-serif;
-  text-shadow: 0 0.5px 0.8px currentColor, 0 0.5px 0.8px currentColor;
+  text-shadow: 0 0.5px 0.5px currentColor, 0 0.5px 0.5px currentColor;
   font-size: 1.9rem;
   letter-spacing: 0.05em;
   text-align: center;
+  padding: 0.5rem;
 }
 
 h2 {
@@ -44,8 +49,16 @@ p {
   font-optical-sizing: auto;
   font-weight: 300;
   font-size: 0.85rem;
-/*   line-height: 1.75rem; */
 }
+
+.error {
+  color: var(--red);
+  font-size: 0.72rem;
+  line-height: 0.9rem;
+  padding-top: 5px;
+}
+
+/* text-[var(--red)] pt-1 */
 
 /* INPUT FIELDS */
 .input {
@@ -54,7 +67,6 @@ p {
   padding: 0.55rem;
   padding-left: 10px;
   margin-left: -0.3em;
-
 }
 
 /* CTA */
@@ -66,6 +78,4 @@ p {
   border-radius: 40px;
   text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
   letter-spacing: 0.03em;
-  
-
 }

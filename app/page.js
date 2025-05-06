@@ -40,10 +40,15 @@ export default function ChatOverview() {
   if (loading) return <div>Loading…</div>;
 
   return (
-    <div className="max-w-md mx-auto divide-y">
-      {chatIds.map(id => (
-        <ChatItem key={id} chatId={id} />
-      ))}
+    <div>
+      <h1>Alle chats</h1>
+
+    
+      <section className="max-w-md mx-auto divide-y">
+        {chatIds.map(id => (
+          <ChatItem key={id} chatId={id} />
+        ))}
+      </section>
     </div>
   );
 }

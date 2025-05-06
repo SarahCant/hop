@@ -6,29 +6,31 @@ import { login } from "../firebase";
 import Link from "next/link";
 
 
-const Login = () => {
+export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
       router.push("/"); //if successful login redirect to home page
     } catch (err) {
-      setErrorMessage(err.code);
+      setErrorMessage("Der var et problem med log ind. Tjek dine input eller opret en ny konto.");
     }
   };
 
   return (
-    <div className=" bg-[var(--blue)]/50 h-screen pt-20">
+    <div className="bg-[var(--blue)]/25 h-screen pt-20">
       <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
-        <h1 className="-mt-3">Log ind</h1>
-        {errorMessage && <div>{errorMessage}</div>}
+        <h1 className="-mt-3 mb-4">Log ind</h1>
+ 
+        {/* input fields */}
         <form onSubmit={onSubmit}>
           <section>
-            <p>Din mail:</p>
+            <label>Din mail:</label>
             <input
               type="text"
               placeholder="e-mail@live.dk"
@@ -38,7 +40,7 @@ const Login = () => {
           
           </section>
           <section className="mt-8">
-            <p>Din adgangskode:</p>
+            <label>Din adgangskode:</label>
             <input
               type="password"
               placeholder="Adgangskode"
@@ -46,8 +48,15 @@ const Login = () => {
               className="input w-full"
             />
           </section>
-          <section className="mt-6 flex flex-col mx-auto">
-            <button type="submit" className="cta mx-auto block">LOG IND</button>
+
+          {/* error message */}
+          <div className="h-6">
+            {errorMessage && <p className="error">{errorMessage}</p>}
+          </div>
+          
+          {/* login CTA + no account? */}
+          <section className="mt-8 flex flex-col mx-auto items-center text-center gap-y-6">
+            <button type="submit" className="cta">LOG IND</button>
 
             <div>
               <p>Ingen konto endnu?</p>
@@ -61,5 +70,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;
