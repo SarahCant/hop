@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createGroupChat } from "../firebase";
 import UserSearch from "./UserSearch";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ChatCreation({ currentUser }) {
   const router = useRouter();
@@ -42,14 +44,13 @@ export default function ChatCreation({ currentUser }) {
 
   return (
     <div>
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-13 w-80 mx-auto mt-8">
         {/* input group name */}
         <section className="flex flex-col pt-4">
-          <label>Gruppenavn:</label>
           <input
-            className="input"
+            className="input w-full"
             type="text"
-            placeholder="Gruppenavn..."
+            placeholder="Indtast gruppenavn"
             value={groupName}
             onChange={(e) => setGroupName(e.target.value)}
             required
@@ -64,50 +65,33 @@ export default function ChatCreation({ currentUser }) {
         />
       </section>
 
-      {/* {selected.length > 0 && (
-        <ul className="list-disc pl-5">
+      {/* selected members */}
+      <h2 className="pt-20" >Din gruppe</h2>
+      {selected.length > 0 ? (
+        <ul>
+        <AnimatePresence> 
           {selected.map((u) => (
-            <li key={u.uid} className="flex justify-between">
-              {u.username}  ({u.email})
-              <button onClick={() => removeUser(u.uid)}>
-                X
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <button
-        className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
-        disabled={!groupName || selected.length === 0}
-        onClick={handleCreate}
-      >
-        Create Chat
-      </button> */}
-
-{     selected.length > 0 && (
-        <ul className="divide-y divide-[var(--gray)]">
-          {selected.map((u) => (
-            <li key={u.uid} className="flex justify-between p-2">
+            <motion.li key={u.uid} className="flex justify-between w-80 mx-auto p-2 bg-[var(--gray)]">
               <div className="flex flex-col">
-                <p className="leading-tight"> {u.username}</p>
-                <p className="leading-snug"> {u.email}</p>
+                <p>{u.username}</p>
+                <p className="!text-[11px] text-gray-500 -mt-1">{u.email}</p>
               </div>
-              
-              <button className="hover:text-[var(--red)] transition-colors" onClick={() => removeUser(u.uid)}>
-                X
-              </button>
-            </li>
+              <button onClick={() => removeUser(u.uid)}> X </button>
+            </motion.li>
           ))}
+   </AnimatePresence>
         </ul>
+      ) : (
+        <p className="text-gray-500 italic pt-2">Du har ikke tilføjet nogle medlemmer endnu.</p>
       )}
 
+      {/* "create" btn */}
       <button
-        className="cta"
+        className="cta !bg-[var(--green)] fixed bottom-50 right-4"
         disabled={!groupName || selected.length === 0}
         onClick={handleCreate}
       >
-        OPRET CHAT
+        OPRET
       </button>
     </div>
   );

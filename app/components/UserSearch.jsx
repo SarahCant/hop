@@ -78,47 +78,57 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
     }, [term, currentUser.uid, selectedUsers]);
   
     return (
-      <div>
-        <section>
-          <p>Tilføj medlemmer:</p>
-        <input
-          className="input w-full"
-          type="text"
-          placeholder="Søg efter mail..."
-          value={term}
-          onChange={(e) => setTerm(e.target.value)}
-        />
-     </section>
-        {loading && <div>Indlæser...</div>}
+      <div className="relative w-full">
+      <input
+        className="input w-full"
+        type="text"
+        placeholder="Søg efter brugermails"
+        value={term}
+        onChange={e => setTerm(e.target.value)}
+      />
 
-        {!loading && suggestions.length > 0 && (
-          <ul className="bg-[var(--gray)] w-88 -mt-2 px-3">
-            {suggestions.map((user, index) => (
-              <React.Fragment key={user.uid}>
-                {index > 0 && (
-                <div className="w-[80%] mx-auto border-t border-gray-500 my-1" />
-                )}
-              <li className="flex justify-between items-center px-2 py-1">
-                <div className="my-2">
-                  <p className="!text-lg">{user.username}</p>
-                  <p className="!text-xs text-gray-500 -mt-1">{user.email}</p>
-                </div>
+      {loading && (
+        <div className="absolute top-full left-0 mt-1 bg-white p-2">
+          Indlæser…
+        </div>
+      )}
 
-                <button
-                  className="cta text-xs !bg-[var(--green)]"
-                  onClick={() => {
-                    onAdd(user);
-                    setTerm("");
-                    setSuggestions([]);
-                  }}
-                >
+      {!loading && suggestions.length > 0 && (
+        <ul
+          className="
+            absolute top-full left-0 w-full mt-1
+            bg-[var(--gray)] rounded shadow-lg z-10
+            max-h-60 overflow-y-auto
+          "
+        >
+          {suggestions.map((user, idx) => (
+            <li
+              key={user.uid}
+              className="flex justify-between items-center px-3 py-2 hover:bg-gray-200"
+            >
+              <div>
+                <p className="text-sm">{user.username}</p>
+                <p className="text-xs text-gray-500 -mt-1">{user.email}</p>
+              </div>
+              <button
+                className="cta text-xs"
+                onClick={() => {
+                  onAdd(user);
+                  setTerm("");
+                  setSuggestions([]);
+                }}
+              >
                 TILFØJ
-                </button>
-              </li>
-              </React.Fragment>
-            ))}
-          </ul>
-        )}
-      </div>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+      
+
+    
+
+
     );
   }
