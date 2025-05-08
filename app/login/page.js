@@ -15,7 +15,7 @@ export default function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+    await login(email, password);
       router.push("/"); //if successful login redirect to home page
     } catch (err) {
       setErrorMessage("Der var et problem med log ind. Tjek dine input eller opret en ny konto.");

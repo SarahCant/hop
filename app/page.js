@@ -6,6 +6,21 @@ import { get, ref } from "firebase/database";
 import { database } from "./firebase";
 import { useAuth } from "@/app/context/auth";
 import ChatItem from "./components/ChatItem";
+import RequireAuth  from "./components/RequireAuth";
+
+export default function ChatOverview() {
+ 
+  const [chatIds, setChatIds] = useState([]);
+  const router = useRouter();
+
+const { currentUser, loading } = useAuth();
+
+ /* import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { get, ref } from "firebase/database";
+import { database } from "./firebase";
+import { useAuth } from "@/app/context/auth";
+import ChatItem from "./components/ChatItem";
 
 export default function ChatOverview() {
   const { currentUser, loading } = useAuth();
@@ -15,10 +30,14 @@ export default function ChatOverview() {
   //redirect to login if not already
   useEffect(() => {
     if (!loading && !currentUser) {
-      router.push("/login");
-    }
-  }, [currentUser, loading, router]);
+      const redirectTimeout = setTimeout(() => {
+        router.push("/login");
+      }, 700 );
 
+      return () => clearTimeout(redirectTimeout);
+    }
+  }, [currentUser, loading, router]); */
+  
   //load chats once authenticated
   useEffect(() => {
     if (loading || !currentUser) return;
@@ -37,10 +56,10 @@ export default function ChatOverview() {
       });
   }, [currentUser, loading]);
 
-  if (loading) return <div>Loading…</div>;
+ /*  if (loading) return <div>Loading…</div>; */
 
   return (
-    <div>
+  <RequireAuth delay={700}> 
       <h1 className="text-center">Alle chats</h1>
 
     
@@ -49,6 +68,6 @@ export default function ChatOverview() {
           <ChatItem key={id} chatId={id} />
         ))}
       </section>
-    </div>
+   </RequireAuth>
   );
 }

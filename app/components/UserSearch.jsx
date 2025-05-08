@@ -1,49 +1,9 @@
-//search users by email
 "use client";
 
 import { useState, useEffect } from "react";
-import { findUserByEmail } from "../firebase";
 import { searchUsersByEmailPrefix } from "../firebase";
 import React from "react";
 
-/* const UserSearch = ({ onUserFound }) => {
-  const [email, setEmail] = useState("");
-  const [searchResult, setSearchResult] = useState(null);
-
-  const handleSearch = async () => {
-    const user = await findUserByEmail(email.toLowerCase());
-    setSearchResult(user);
-    if (user && onUserFound) {
-      onUserFound(user);
-    };
-
-    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-        setError("Invalid email format");
-        return;
-      }
-  };
-
-
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter user's email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-      {searchResult && (
-        <div>
-          Found: {searchResult.username} ({searchResult.email})
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default UserSearch;
- */
 
 export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
     const [term, setTerm] = useState("");
@@ -80,33 +40,34 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
     return (
       <div className="relative w-full">
       <input
-        className="input w-full"
+        className="input w-full !bg-[var(--blue)]/20"
         type="text"
         placeholder="Søg efter brugermails"
         value={term}
         onChange={e => setTerm(e.target.value)}
       />
 
-      {loading && (
-        <div className="absolute top-full left-0 mt-1 bg-white p-2">
-          Indlæser…
-        </div>
-      )}
+      
 
       {!loading && suggestions.length > 0 && (
         <ul
           className="
-            absolute top-full left-0 w-full mt-1
-            bg-[var(--gray)] rounded shadow-lg z-10
+            absolute top-full  w-75 left-1 mt-1
+            bg-[var(--bg)] rounded shadow-lg z-10
             max-h-60 overflow-y-auto
           "
-        >
-          {suggestions.map((user, idx) => (
+        > 
+        <div className="bg-[var(--blue)]/20"> 
+
+        
+          {suggestions.map((user, i) => (
+            <React.Fragment>
             <li
               key={user.uid}
-              className="flex justify-between items-center px-3 py-2 hover:bg-gray-200"
+              className="flex justify-between items-center px-3 py-2"
             >
-              <div>
+              
+              <div className="flex-col">
                 <p className="text-sm">{user.username}</p>
                 <p className="text-xs text-gray-500 -mt-1">{user.email}</p>
               </div>
@@ -121,7 +82,15 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
                 TILFØJ
               </button>
             </li>
+
+            {i < suggestions.length - 1 && (
+              <div className="bg-[var(--gray)] w-full">
+                <hr className="w-[80%] mx-auto border-t border-gray-300 my-0.5" />
+              </div>
+            )}
+         </React.Fragment>
           ))}
+          </div>
         </ul>
       )}
     </div>
