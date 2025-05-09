@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { register } from "../firebase";
 import Link from "next/link";
+import RedirectIfAuth from "../components/RedirectIfAuth";
 
 export default function Register() {
   const router = useRouter();
@@ -53,6 +54,9 @@ export default function Register() {
   };
 
   return (
+    <RedirectIfAuth>
+
+   
     <div className="bg-[var(--cta)]/45 h-screen pt-20">
       <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
         <h1 className="-mt-3 mb-4 text-center">Opret konto</h1>
@@ -127,6 +131,7 @@ export default function Register() {
         </form>
       </div>
     </div>
+    </RedirectIfAuth>
   );
 }
 

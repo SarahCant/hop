@@ -7,6 +7,7 @@ import { database } from "./firebase";
 import { useAuth } from "@/app/context/auth";
 import ChatItem from "./components/ChatItem";
 import RequireAuth  from "./components/RequireAuth";
+import BottomMenu from "./components/BottomMenu";
 
 export default function ChatOverview() {
  
@@ -56,7 +57,13 @@ export default function ChatOverview() {
       });
   }, [currentUser, loading]);
 
- /*  if (loading) return <div>Loading…</div>; */
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-[var(--bg)]">
+        <div className="w-16 h-16 border-4 border-t-transparent border-[var(--green)] rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
   <RequireAuth delay={700}> 
@@ -68,6 +75,7 @@ export default function ChatOverview() {
           <ChatItem key={id} chatId={id} />
         ))}
       </section>
+       <BottomMenu />
    </RequireAuth>
   );
 }

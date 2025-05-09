@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "../firebase";
 import Link from "next/link";
+import RedirectIfAuth from "../components/RedirectIfAuth";
 
 
 export default function Login() {
@@ -23,7 +24,8 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-[var(--cta)]/45 h-screen pt-20">
+    <RedirectIfAuth>
+      <div className="bg-[var(--cta)]/45 h-screen pt-20 ">
       <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
         <h1 className="-mt-3 mb-4 text-center">Log ind</h1>
  
@@ -67,6 +69,7 @@ export default function Login() {
           </section>
         </form>
       </div>
-    </div>
+       </div>
+    </RedirectIfAuth>
   );
 };

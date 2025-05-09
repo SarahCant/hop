@@ -2,7 +2,7 @@
 
 import "./globals.css";
 import { AuthProvider } from "./context/auth";
-import BottomMenu from "./bottommenu";
+/* import BottomMenu from "./components/BottomMenu"; */
 
 export default function RootLayout({ children }) {
 
@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
       <body className="bg-[var(--bg)]">
         <AuthProvider>
           {children}
-          <BottomMenu />
+          {/* <BottomMenu /> */}
         </AuthProvider>
       </body>
     </html>

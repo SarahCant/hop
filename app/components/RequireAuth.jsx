@@ -17,16 +17,20 @@ export default function RequireAuth({ children, delay = 700 }) { /* delay 0.7s  
     }
   }, [currentUser, loading, router, delay]);
 
-  // 1) still initializing? show a loader
+  //if loading
+  console.log({loading})
   if (loading) {
-    return <div>Loading…</div>;
+    return ( 
+      <div className="flex items-center justify-center h-screen bg-[var(--bg)]">
+        <div className="w-16 h-16 border-4 border-t-transparent border-[var(--green)] rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
-  // 2) no user? (we’re already redirecting above)
+  //redirect
   if (!currentUser) {
     return null;
   }
 
-  // 3) safe to render children
   return <>{children}</>;
 }
