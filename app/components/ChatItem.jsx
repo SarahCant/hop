@@ -74,6 +74,7 @@ import {
   child,
 } from "firebase/database";
 import { database } from "../firebase";
+import UserIcon from "./UserIcon";
 
 export default function ChatItem({ chatId }) {
   const [name, setName] = useState("");
@@ -85,15 +86,15 @@ export default function ChatItem({ chatId }) {
     if (!chatId) return;
 
     (async () => {
-      // 1) chat name
+      //fetch chat name
       const nameSnap = await get(child(ref(database), `chats/${chatId}/name`));
       setName(nameSnap.exists() ? nameSnap.val() : "Ukendt chat");
 
-      // 2) creation time
+      //creation time
       const createdSnap = await get(child(ref(database), `chats/${chatId}/createdAt`));
       const createdAt = createdSnap.exists() ? createdSnap.val() : 0;
 
-      // 3) last message
+      //latest message
       const lastMsgSnap = await get(
         query(ref(database, `chats/${chatId}/messages`), limitToLast(1))
       );
@@ -110,7 +111,7 @@ export default function ChatItem({ chatId }) {
       setLatestText(lastTxt);
       setTimestamp(lastTs || createdAt);
 
-      // 4) fetch sender’s username
+      //sender’s username
       if (lastSender) {
         const userSnap = await get(child(ref(database), `users/${lastSender}/username`));
         setSenderName(userSnap.exists() ? userSnap.val() : lastSender);
@@ -118,26 +119,40 @@ export default function ChatItem({ chatId }) {
     })();
   }, [chatId]);
 
-  const timeString = timestamp
-    ? new Date(timestamp).toLocaleString("da-DK", {
-        dateStyle: "short",
-        timeStyle: "short",
-      })
+    //message timestamp
+    const timeString = timestamp
+    ? (() => {
+      const d = new Date(timestamp);
+      const day = String(d.getDate()).padStart(2, "0");
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const hours = String(d.getHours()).padStart(2, "0");
+      const minutes = String(d.getMinutes()).padStart(2, "0");
+      return `${day}/${month} ${hours}:${minutes}`;
+    }) ()
     : "";
 
   return (
-    <Link href={`/chat/${chatId}`}>
-    
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold">{name}</h2>
-          <span className="text-xs text-gray-500">{timeString}</span>
-        </div>
-        <p className="mt-1 text-sm text-gray-600">
-          {latestText
-            ? `${senderName}: ${latestText}`
-            : "Gruppe oprettet"}
-        </p>
-      
+      <Link href={`/chat/${chatId}`}>
+        <section className="block">
+          <div className="flex items-center justify-between p-4">
+
+            <div className="flex items-center space-x-3">
+              <UserIcon name={senderName} />
+              <div className="flex flex-col ml-2">
+                <h2 className="text-lg font-semibold">{name}</h2>
+                <p className="-mt-1 text-sm text-gray-600">
+                  {latestText
+                  ? `${senderName}: ${latestText}`
+                  : "Gruppe oprettet"}
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xs text-gray-500 whitespace-nowrap">
+              {timeString}
+            </span>
+          </div>
+        </section>
     </Link>
   );
 }

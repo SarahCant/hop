@@ -5,6 +5,7 @@ import { ref, onChildAdded, query, orderByChild, off, get, child } from "firebas
 import { database, sendMessage } from "../../firebase";
 import { useAuth } from "@/app/context/auth";
 import ChatName from "@/app/components/ChatName";
+import UserIcon from "@/app/components/UserIcon";
 
 
 export default function ChatRoom() {
