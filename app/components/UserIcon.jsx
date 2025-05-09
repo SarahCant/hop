@@ -1,4 +1,4 @@
-export default function UserIcon({ name, className = 'w-8 h-8 bg-[var(--blue)]/50 text-[var(--blue)]' }) {
+export default function UserIcon({ name, className = 'uicon' }) {
   //convert username's first character to uppercase, fallback '?'
   const initial = name?.[0]?.toUpperCase() || '?';
 

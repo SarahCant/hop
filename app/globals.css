@@ -2,7 +2,7 @@
 
 /* FONT IMPORT */
 @import url("https://use.typekit.net/xyx5wta.css");
-@import url("https://use.typekit.net/xyx5wta.css");
+@import url("href:https://use.typekit.net/xyx5wta.css");
 
 /* ROOT */
 :root {
@@ -12,7 +12,7 @@
   --purple: #9a72dd;
   --blue: #0081d7;
   --green: #55b77c;
-  --gray: #F2F4F6;
+  --gray: #e9ebed;
   --black: #112418;
   --active: #DDF0E4;
 }
@@ -24,14 +24,20 @@ body {
 }
 
 /* FONTS */
-p, h1, h2, h3 {
+p {
   font-family: "verdana", sans-serif;
   font-style: normal;
   color: var(--black);
 }
 
+h1, h2, h3 {
+  font-family: "oswald", sans-serif;
+  font-style: normal;
+  color: var(--black);
+}
+
 h1 {
-  text-shadow: 0 0.5px 0.5px currentColor, 0 0.5px 0.5px currentColor;
+  font-weight: 400;
   font-size: 1.9rem;
   letter-spacing: 0.05em;
   padding: 0.5rem 0;
@@ -71,7 +77,7 @@ p {
 
 /* CTA */
 .cta {
-  background-color: #f5c518;
+  background-color: var(--cta);
   padding: 0.5rem 2rem;
   font-family: "verdana", sans-serif;
   color: var(--bg);
@@ -84,4 +90,12 @@ p {
 .menu-icon {
   height: 1.75rem;
   width: auto;
+}
+
+/* USER ICONS */
+.uicon {
+  width: calc(var(--spacing) * 8);
+  height: calc(var(--spacing) * 8);
+  background-color: color-mix(in oklab, var(--blue) 50%, transparent);
+  color: var(--blue);
 }

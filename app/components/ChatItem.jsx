@@ -139,7 +139,7 @@ export default function ChatItem({ chatId }) {
             <div className="flex items-center space-x-3">
               <UserIcon name={senderName} />
               <div className="flex flex-col ml-2">
-                <h2 className="text-lg font-semibold">{name}</h2>
+                <h2>{name}</h2>
                 <p className="-mt-1 text-sm text-gray-600">
                   {latestText
                   ? `${senderName}: ${latestText}`
