@@ -14,6 +14,7 @@ import { useAuth } from "@/app/context/auth";
 import ChatName from "@/app/components/ChatName";
 import UserIcon from "@/app/components/UserIcon";
 import Link from "next/link";
+import TimeStamp from "@/app/components/TimeStamp";
 
 export default function ChatRoom() {
   const { chatId } = useParams();
@@ -23,7 +24,7 @@ export default function ChatRoom() {
   const listRef = useRef(null);
   const endRef = useRef(null);
 
-  /* start at bottom */
+  /* useRef to start at bottom */
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "auto" });
   }, [messages]);
@@ -81,6 +82,7 @@ export default function ChatRoom() {
 
   return (
     <div className="flex flex-col h-screen">
+      {/* header */}
       <header className="flex items-center justify-between px-4 py-3 shadow-lg ">
         <Link href="/">
           <h2 className="!text-xl">&lt;</h2>
@@ -89,34 +91,52 @@ export default function ChatRoom() {
         <div className="w-1" />
       </header>
 
-      <div className="flex-1 overflow-auto px-4 py-2 space-y-6">
+      {/* actual chat */}
+      {/* check for current user and different msg styling if so */}
+      <section className="flex-1 overflow-auto px-4 py-2 space-y-9">
         {messages.map((m) => {
           const isMe = m.sender === currentUser?.uid;
           return (
-            <div
-              key={m.id}
-              className={`flex ${isMe ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`relative max-w-xs break-words ${
-                  isMe
-                    ? "bg-[var(--green)] text-[var(--bg)] rounded-tl-xl rounded-bl-xl rounded-tr-xl right-2.5"
-                    : "bg-[var(--gray)] text-[var(--black)] rounded-xl left-4.5"
-                } px-4 py-2`}
-              >
-                {m.text}
-
-                {!isMe && (
-                  <div className="absolute -bottom-0.5 -left-3.5 -mb-1 -ml-3.5">
-                    <UserIcon name={m.senderName} className="uicon !w-6 !h-6" />
-                  </div>
-                )}
+            <>
+              {/* timestamps */}
+              <div className="flex justify-center mb-2 items-center gap-2 ">
+                <div className="w-[25%] border-b border-[var(--gray)]" />
+                <TimeStamp
+                  timestamp={m.timestamp}
+                  className="text-xs text-gray-400 whitespace-nowrap"
+                />
+                <div className="w-[25%] border-b border-[var(--gray)]" />
               </div>
-            </div>
+
+              <div
+                key={m.id}
+                className={`flex ${isMe ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`relative break-words max-w-[70%] ${
+                    isMe
+                      ? "bg-[var(--green)] text-[var(--bg)] rounded-tl-4xl rounded-bl-4xl rounded-tr-4xl right-2.5"
+                      : "bg-[var(--gray)] text-[var(--black)] rounded-tl-4xl rounded-tr-4xl rounded-br-4xl left-4.5"
+                  } px-4 py-3`}
+                >
+                  {m.text}
+
+                  {/* UserIcon if not current user */}
+                  {!isMe && (
+                    <div className="absolute -bottom-1 -left-3.5 -mb-1 -ml-3.5">
+                      <UserIcon
+                        name={m.senderName}
+                        className="uicon !w-6 !h-6"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
           );
         })}
         <div ref={endRef} />
-      </div>
+      </section>
 
       <div className="p-4 border-t border-[var(--green)] flex items-center space-x-2">
         <input
