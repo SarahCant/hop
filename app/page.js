@@ -5,12 +5,12 @@ import { get, ref, child, query, limitToLast } from "firebase/database";
 import { database } from "./firebase";
 import { useAuth } from "@/app/context/auth";
 import ChatItem from "./components/ChatItem";
-import RequireAuth  from "./components/RequireAuth";
+import RequireAuth from "./components/RequireAuth";
 import BottomMenu from "./components/BottomMenu";
 import React from "react";
 
 export default function ChatOverview() {
-  const [chatList, setChatList] = useState([]); 
+  const [chatList, setChatList] = useState([]);
   const { currentUser, loading } = useAuth();
 
   useEffect(() => {
@@ -18,25 +18,22 @@ export default function ChatOverview() {
 
     //fetch array of chat IDs
     get(ref(database, `users/${currentUser.uid}/chats`))
-      .then(snap => {
+      .then((snap) => {
         const ids = snap.exists() ? Object.keys(snap.val()) : [];
-        
+
         //lastMsg and createdAt for each chat
         return Promise.all(
           ids.map(async (chatId) => {
             const [createdSnap, lastMsgSnap] = await Promise.all([
               get(child(ref(database), `chats/${chatId}/createdAt`)),
               get(
-                query(
-                  ref(database, `chats/${chatId}/messages`),
-                  limitToLast(1)
-                )
+                query(ref(database, `chats/${chatId}/messages`), limitToLast(1))
               ),
             ]);
 
             const createdAt = createdSnap.exists() ? createdSnap.val() : 0;
             let lastTs = 0;
-            lastMsgSnap.forEach(m => {
+            lastMsgSnap.forEach((m) => {
               const data = m.val();
               if (data.timestamp > lastTs) lastTs = data.timestamp;
             });
@@ -49,11 +46,11 @@ export default function ChatOverview() {
       })
 
       //sort descending and store in state
-      .then(list => {
+      .then((list) => {
         list.sort((a, b) => b.timestamp - a.timestamp);
         setChatList(list);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Failed to load/sort chats:", err);
         setChatList([]);
       });
@@ -70,7 +67,7 @@ export default function ChatOverview() {
 
   return (
     <RequireAuth delay={700}>
-      <div className="bg-[var(--blue)]/50 shadow-lg"> 
+      <div className="bg-[var(--blue)]/50 shadow-lg">
         <h1 className="text-center !pt-6 !pb-4 mb-3">SpilSammen Chats</h1>
       </div>
       <section>
@@ -78,19 +75,15 @@ export default function ChatOverview() {
           <React.Fragment key={chatId}>
             <ChatItem key={chatId} chatId={chatId} />
 
-     
             {i < chatList.length - 1 && (
               <div className="bg-[var(--bg)] w-full">
                 <hr className="w-[75%] mx-auto border-t border-gray-300 my-2" />
               </div>
             )}
-
           </React.Fragment>
-          
         ))}
       </section>
       <BottomMenu />
     </RequireAuth>
   );
 }
- 

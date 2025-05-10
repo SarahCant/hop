@@ -21,6 +21,12 @@ export default function ChatRoom() {
   const [messages, setMessages] = useState([]);
   const [draft, setDraft] = useState("");
   const listRef = useRef(null);
+  const endRef = useRef(null);
+
+  /* start at bottom */
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "auto" });
+  }, [messages]);
 
   useEffect(() => {
     if (!chatId) return;
@@ -35,16 +41,15 @@ export default function ChatRoom() {
       // fetch the user node, then process it in .then()
       get(ref(database, `users/${data.sender}`))
         .then((userSnap) => {
-          /* 
-          console.log(
-            "Fetched user node for",
-            data.sender,
-            "→",
-            userSnap.exists() ? userSnap.val() : null
-          ); */
+          //console.log(
+          //"Fetched user node for",
+          //data.sender,
+          //"→",
+          //userSnap.exists() ? userSnap.val() : null
+          // );
 
           const senderName = userSnap.exists()
-            ? (userSnap.val().username || userSnap.val().name || "Ukendt")
+            ? userSnap.val().username || userSnap.val().name || "Ukendt"
             : "Ukendt";
 
           setMessages((prev) => [
@@ -76,17 +81,14 @@ export default function ChatRoom() {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="flex items-center justify-between px-4 py-3 border-b border-[var(--blue)] shadow-lg ">
-        <Link href="/"> 
+      <header className="flex items-center justify-between px-4 py-3 shadow-lg ">
+        <Link href="/">
           <h2 className="!text-xl">&lt;</h2>
         </Link>
         <ChatName className="text-center" />
-        <div className="w-1"/>
+        <div className="w-1" />
       </header>
 
-
-
-      {/* messages */}
       <div className="flex-1 overflow-auto px-4 py-2 space-y-6">
         {messages.map((m) => {
           const isMe = m.sender === currentUser?.uid;
@@ -106,17 +108,16 @@ export default function ChatRoom() {
 
                 {!isMe && (
                   <div className="absolute -bottom-0.5 -left-3.5 -mb-1 -ml-3.5">
-                    <UserIcon name={m.senderName} className="uicon !w-6 !h-6"/>
+                    <UserIcon name={m.senderName} className="uicon !w-6 !h-6" />
                   </div>
                 )}
               </div>
             </div>
           );
         })}
-        <div ref={listRef} />
+        <div ref={endRef} />
       </div>
 
-      {/* msg bar */}
       <div className="p-4 border-t border-[var(--green)] flex items-center space-x-2">
         <input
           type="text"

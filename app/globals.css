@@ -6,7 +6,7 @@
 
 /* ROOT */
 :root {
-  --bg: #FEFDFF;
+  --bg: #fefdff;
   --cta: #f5c518;
   --red: #ed2424;
   --purple: #9a72dd;
@@ -14,7 +14,7 @@
   --green: #55b77c;
   --gray: #e9ebed;
   --black: #112418;
-  --active: #DDF0E4;
+  --active: #ddf0e4;
 }
 
 body {
@@ -30,7 +30,9 @@ p {
   color: var(--black);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "oswald", sans-serif;
   font-style: normal;
   color: var(--black);

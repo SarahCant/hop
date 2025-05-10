@@ -1,9 +1,11 @@
-export default function UserIcon({ name, className = 'uicon' }) {
+export default function UserIcon({ name, className = "uicon" }) {
   //convert username's first character to uppercase, fallback '?'
-  const initial = name?.[0]?.toUpperCase() || '?';
+  const initial = name?.[0]?.toUpperCase() || "?";
 
   return (
-    <div className={`flex items-center justify-center rounded-full ${className}`}>
+    <div
+      className={`flex items-center justify-center rounded-full ${className}`}
+    >
       <span className="text-[14px]">{initial}</span>
     </div>
   );

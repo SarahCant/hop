@@ -2,15 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  get,
-  ref,
-  query,
-  limitToLast,
-  child,
-} from "firebase/database";
+import { get, ref, query, limitToLast, child } from "firebase/database";
 import { database } from "../firebase";
 import UserIcon from "./UserIcon";
+
+import TimeStamp from "./TimeStamp";
 
 export default function ChatItem({ chatId }) {
   const [name, setName] = useState("");
@@ -27,7 +23,9 @@ export default function ChatItem({ chatId }) {
       setName(nameSnap.exists() ? nameSnap.val() : "Ukendt chat");
 
       //creation time
-      const createdSnap = await get(child(ref(database), `chats/${chatId}/createdAt`));
+      const createdSnap = await get(
+        child(ref(database), `chats/${chatId}/createdAt`)
+      );
       const createdAt = createdSnap.exists() ? createdSnap.val() : 0;
 
       //latest message
@@ -37,10 +35,10 @@ export default function ChatItem({ chatId }) {
       let lastTxt = "";
       let lastTs = 0;
       let lastSender = "";
-      lastMsgSnap.forEach(m => {
+      lastMsgSnap.forEach((m) => {
         const v = m.val();
         lastTxt = v.text;
-        lastTs  = v.timestamp;
+        lastTs = v.timestamp;
         lastSender = v.sender;
       });
 
@@ -49,46 +47,36 @@ export default function ChatItem({ chatId }) {
 
       //sender’s username
       if (lastSender) {
-        const userSnap = await get(child(ref(database), `users/${lastSender}/username`));
+        const userSnap = await get(
+          child(ref(database), `users/${lastSender}/username`)
+        );
         setSenderName(userSnap.exists() ? userSnap.val() : lastSender);
       }
     })();
   }, [chatId]);
 
-    //message timestamp
-    const timeString = timestamp
-    ? (() => {
-      const d = new Date(timestamp);
-      const day = String(d.getDate()).padStart(2, "0");
-      const month = String(d.getMonth() + 1).padStart(2, "0");
-      const hours = String(d.getHours()).padStart(2, "0");
-      const minutes = String(d.getMinutes()).padStart(2, "0");
-      return `${day}/${month} ${hours}:${minutes}`;
-    }) ()
-    : "";
-
   return (
-      <Link href={`/chat/${chatId}`}>
-        <section className="block">
-          <div className="flex items-center justify-between p-4">
-
-            <div className="flex items-center space-x-3">
-              <UserIcon name={name} />
-              <div className="flex flex-col ml-2">
-                <h2>{name}</h2>
-                <p className="-mt-1 text-sm text-gray-600">
-                  {latestText
-                  ? `${senderName}: ${latestText}`
+    <Link href={`/chat/${chatId}`}>
+      <section className="block">
+        <div className="flex items-center justify-between p-4">
+          <div className="flex items-center space-x-3 flex-1 min-w-0">
+            <UserIcon name={name} />
+            <div className="flex flex-col ml-2 flex-1 min-w-0">
+              <h2 className="truncate">{name}</h2>
+              <p className="-mt-1 text-sm text-gray-600 truncate">
+                {latestText
+                  ? `${senderName} : ${latestText}`
                   : "Gruppe oprettet"}
-                </p>
-              </div>
+              </p>
             </div>
-
-            <span className="text-xs text-gray-500 whitespace-nowrap">
-              {timeString}
-            </span>
           </div>
-        </section>
+
+          <TimeStamp
+            timestamp={timestamp}
+            className="text-xs text-gray-500 whitespace-nowrap"
+          />
+        </div>
+      </section>
     </Link>
   );
 }

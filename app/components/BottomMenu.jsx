@@ -41,68 +41,69 @@ export default function BottomMenu() {
             <li key={item.href} className="flex-1 flex justify-center">
               <Link href={item.href}>
                 {isCreate ? (
-                    <div className="flex flex-col items-center">
-                        <div className=" -mt-10  ">
-                            <Image 
-                              src={item.icon}
-                              width={80}
-                              height={80}
-                              alt={item.label}
-                             
-                            />
-                        </div>
-                        <span className={`-mt-1 pb-2 text-xs border-b-2 border-[var(--active)] ${
-                            isActive ? "text-[var(--active)] " : "text-[var(--black)] border-transparent"
-                        }`}>
-                            {item.label}
-                        </span>
-
+                  <div className="flex flex-col items-center">
+                    <div className=" -mt-10  ">
+                      <Image
+                        src={item.icon}
+                        width={80}
+                        height={80}
+                        alt={item.label}
+                      />
                     </div>
+                    <span
+                      className={`-mt-1 pb-2 text-xs border-b-2 border-[var(--active)] ${
+                        isActive
+                          ? "text-[var(--active)] "
+                          : "text-[var(--black)] border-transparent"
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
                 ) : (
-                      <div
-                  className={`flex flex-col items-center justify-center py-2 border-b-2 ${
-                    isActive
-                      ? "text-[var(--active)] border-[var(--active)] "
-                      : "border-transparent"}
+                  <div
+                    className={`flex flex-col items-center justify-center py-2 border-b-2 ${
+                      isActive
+                        ? "text-[var(--active)] border-[var(--active)] "
+                        : "border-transparent"
+                    }
                       ${item.extraClasses || ""}
                     `}
-                >
-                  <Image 
-                    src={isActive ? item.activeIcon : item.icon}
-                    width={500}
-                    height={500}
-                    alt={item.label}
-                    className={`menu-icon ${item.extraIconClasses || ""}`}
-                  />
-                
-                  <span className="text-xs">{item.label}</span>
-                </div>
+                  >
+                    <Image
+                      src={isActive ? item.activeIcon : item.icon}
+                      width={500}
+                      height={500}
+                      alt={item.label}
+                      className={`menu-icon ${item.extraIconClasses || ""}`}
+                    />
+
+                    <span className="text-xs">{item.label}</span>
+                  </div>
                 )}
-              
               </Link>
             </li>
           );
         })}
 
-          <li className="flex-1">
-            <span
-              onClick={() => {
-                logout();
-                router.push("/login");
-              }}
-              className="flex flex-col items-center justify-center py-2"
-            >
-              <Image
-                src="/img/icons/logout.png"
-                width={500}
-                height={500}
-                alt="menu icon" 
-                className="menu-icon"
-              />
-              <label className="text-xs">Log ud</label>
-            </span>
-          </li>
-    
+        <li className="flex-1">
+          <span
+            onClick={() => {
+              logout();
+              router.push("/login");
+            }}
+            className="flex flex-col items-center justify-center py-2"
+          >
+            <Image
+              src="/img/icons/logout.png"
+              width={500}
+              height={500}
+              alt="menu icon"
+              className="menu-icon"
+            />
+            <label className="text-xs">Log ud</label>
+          </span>
+        </li>
       </ul>
     </nav>
   );
