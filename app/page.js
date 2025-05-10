@@ -8,6 +8,7 @@ import ChatItem from "./components/ChatItem";
 import RequireAuth from "./components/RequireAuth";
 import BottomMenu from "./components/BottomMenu";
 import React from "react";
+import Banner from "./components/Banner";
 
 export default function ChatOverview() {
   const [chatList, setChatList] = useState([]);
@@ -67,9 +68,9 @@ export default function ChatOverview() {
 
   return (
     <RequireAuth delay={700}>
-      <div className="bg-[var(--blue)]/50 shadow-lg">
-        <h1 className="text-center !pt-6 !pb-4 mb-3">SpilSammen Chats</h1>
-      </div>
+      {/* <h1 className="text-center !pt-6 !pb-4 mb-3">SpilSammen Chats</h1> */}
+      <Banner className="" />
+
       <section>
         {chatList.map(({ chatId }, i) => (
           <React.Fragment key={chatId}>
