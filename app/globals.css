@@ -12,6 +12,7 @@
   --purple: #9a72dd;
   --blue: #0081d7;
   --green: #55b77c;
+  --dark-green: #4ca46f;
   --gray: #e9ebed;
   --black: #112418;
   --active: #ddf0e4;
@@ -23,7 +24,7 @@ body {
   background-color: var(--bg);
 }
 
-/* FONTS */
+/* --- FONTS --- */
 p {
   font-family: "verdana", sans-serif;
   font-style: normal;
@@ -66,8 +67,6 @@ p {
   padding-top: 5px;
 }
 
-/* text-[var(--red)] pt-1 */
-
 /* INPUT FIELDS */
 .input {
   background-color: var(--gray);
@@ -88,6 +87,7 @@ p {
   letter-spacing: 0.03em;
 }
 
+/* --- ICONS --- */
 /* MENU ICONS */
 .menu-icon {
   height: 1.75rem;
@@ -96,13 +96,13 @@ p {
 
 /* USER ICONS */
 .uicon {
-  width: calc(var(--spacing) * 8);
-  height: calc(var(--spacing) * 8);
+  width: 8.5vw;
+  height: 8.5vw;
   background-color: color-mix(in oklab, var(--blue) 50%, transparent);
   color: var(--blue);
 }
 
-/* BANNER */
+/* --- BANNER --- */
 .banner-outer {
   width: 100vw;
   display: flex;
@@ -113,30 +113,16 @@ p {
 }
 
 .banner {
-  max-width: 70vw;
-  min-width: 70vw;
+  max-width: 75vw;
+  min-width: 75vw;
   height: 3rem;
-  border: 1px solid #8a1;
+  border: 1px solid var(--dark-green);
   color: var(--bg);
-  background: #9b2;
+  background: var(--green);
   border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15) inset, 0 6px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 4px var(--dark-green) inset, 0 0px 0px;
+  text-overflow: clip;
 }
-
-/* .banner::before,
-.banner::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: -45vw;
-  top: 1rem;
-  width: 2rem;
-  border: 1.4rem solid #9b2;
-  border-radius: 15px;
-  border-right: 20px solid #791;
-  border-bottom-color: #94b81e;
-  border-left-color: transparent;
-} */
 
 .banner::before,
 .banner::after {
@@ -146,20 +132,19 @@ p {
   top: 1rem;
   width: 3rem;
   height: 2.8rem;
-  background: #9b2;
-
+  background: var(--dark-green);
   border-radius: 15px;
 }
 
 .banner::before {
-  left: 9vw;
+  left: 7vw;
   clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 25% 50%, 0% 0%);
 }
 
 .banner::after {
-  right: 9.4vw;
+  right: 7.4vw;
   left: auto;
-  border-left: 20px solid #791;
+  border-left: 20px solid var(--dark-green);
   border-right: 20px solid transparent;
   transform: scaleX(90deg);
   clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 0 100%, 0% 50%, 0 0);
