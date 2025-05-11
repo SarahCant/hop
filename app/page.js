@@ -39,7 +39,7 @@ export default function ChatOverview() {
               if (data.timestamp > lastTs) lastTs = data.timestamp;
             });
 
-            //pick newest out of the two
+            //pick newest out of the two to sort after
             const timestamp = lastTs || createdAt;
             return { chatId, timestamp };
           })
@@ -73,7 +73,7 @@ export default function ChatOverview() {
         <Banner />
       </div>
 
-      <section>
+      <section className="pb-[30vw]">
         {chatList.map(({ chatId }, i) => (
           <React.Fragment key={chatId}>
             <ChatItem key={chatId} chatId={chatId} />
