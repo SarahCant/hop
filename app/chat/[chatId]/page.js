@@ -15,6 +15,8 @@ import ChatName from "@/app/components/ChatName";
 import UserIcon from "@/app/components/UserIcon";
 import Link from "next/link";
 import TimeStamp from "@/app/components/TimeStamp";
+import Banner from "@/app/components/Banner";
+import Image from "next/image";
 
 export default function ChatRoom() {
   const { chatId } = useParams();
@@ -83,11 +85,22 @@ export default function ChatRoom() {
   return (
     <div className="flex flex-col h-screen">
       {/* header */}
-      <header className="flex items-center justify-between px-4 py-3 shadow-lg ">
-        <Link href="/">
-          <h2 className="!text-xl">&lt;</h2>
+      <header className="shadow-lg ">
+        <Link href="/" className="absolute top-[0.7rem] left-[0.2rem]">
+          <Image
+            src="/img/icons/back-green.png"
+            width={15}
+            height={15}
+            alt="Tilbage"
+            className="!ml-[0.2rem]"
+          />
+          <p className="!text-[10px] -mt-1 !text-[var(--green)]">Chats</p>
         </Link>
-        <ChatName className="text-center" />
+
+        <Banner>
+          <ChatName />
+        </Banner>
+
         <div className="w-1" />
       </header>
 

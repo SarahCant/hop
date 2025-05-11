@@ -14,7 +14,9 @@ export default function ChatName({ className = "" }) {
 
     const fetchName = async () => {
       try {
-        const nameSnapshot = await get(child(ref(database), `chats/${chatId}/name`));
+        const nameSnapshot = await get(
+          child(ref(database), `chats/${chatId}/name`)
+        );
         if (nameSnapshot.exists()) {
           setName(nameSnapshot.val());
         } else {
@@ -29,5 +31,5 @@ export default function ChatName({ className = "" }) {
     fetchName();
   }, [chatId]);
 
-  return <h1 className={className}>{name || "Indlæser..."}</h1>;
+  return <div className={className}>{name}</div>;
 }

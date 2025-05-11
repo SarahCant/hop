@@ -69,7 +69,9 @@ export default function ChatOverview() {
   return (
     <RequireAuth delay={700}>
       {/* <h1 className="text-center !pt-6 !pb-4 mb-3">SpilSammen Chats</h1> */}
-      <Banner className="" />
+      <div className="shadow-lg">
+        <Banner />
+      </div>
 
       <section>
         {chatList.map(({ chatId }, i) => (
@@ -78,7 +80,7 @@ export default function ChatOverview() {
 
             {i < chatList.length - 1 && (
               <div className="bg-[var(--bg)] w-full">
-                <hr className="w-[75%] mx-auto border-t border-gray-300 my-2" />
+                <hr className="w-[55%] mx-auto border-t border-gray-300 my-3" />
               </div>
             )}
           </React.Fragment>

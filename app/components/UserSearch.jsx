@@ -44,9 +44,7 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
         placeholder="Søg efter brugermails"
         value={term}
         onChange={(e) => setTerm(e.target.value)}
-        className={`input w-full  ${
-          term === "" ? "!bg-[var(--green)]/40" : "!bg-[var(--green)]/20"
-        } focus:outline-none focus:ring-2 focus:ring-[var(--green)] focus:border-[var(--green)]`}
+        className="input w-full !bg-[var(--blue)]/40 focus:outline-none focus:ring-2 focus:ring-[var(--blue)] focus:border-[var(--blue)]"
       />
 
       {!loading && suggestions.length > 0 && (
@@ -69,7 +67,7 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
                     <p className="text-xs text-gray-500 -mt-1">{user.email}</p>
                   </div>
                   <button
-                    className="cta text-xs"
+                    className="cta text-xs !w-fit"
                     onClick={() => {
                       onAdd(user);
                       setTerm("");
@@ -81,7 +79,7 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
                 </li>
 
                 {i < suggestions.length - 1 && (
-                  <div className="bg-[var(--gray)] w-full">
+                  <div className="w-full">
                     <hr className="w-[80%] mx-auto border-t border-gray-300 my-0.5" />
                   </div>
                 )}
