@@ -9,7 +9,7 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // fetch suggestions whenever `term` changes
+  //fetch suggestions whenever something is written
   useEffect(() => {
     let isCanceled = false;
     async function fetch() {
@@ -20,7 +20,7 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
       setLoading(true);
       const matches = await searchUsersByEmailPrefix(term.toLowerCase());
       if (isCanceled) return;
-      // filter out self and already‐selected
+      //don't display currentUser or already selected users
       setSuggestions(
         matches.filter(
           (u) =>
@@ -47,6 +47,7 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
         className="input w-full !bg-[var(--blue)]/40 focus:outline-none focus:ring-2 focus:ring-[var(--blue)] focus:border-[var(--blue)]"
       />
 
+      {/* search results */}
       {!loading && suggestions.length > 0 && (
         <ul
           className="
@@ -66,6 +67,8 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
                     <p className="text-sm">{user.username}</p>
                     <p className="text-xs text-gray-500 -mt-1">{user.email}</p>
                   </div>
+
+                  {/* add btn */}
                   <button
                     className="cta text-xs !w-fit"
                     onClick={() => {
@@ -78,6 +81,7 @@ export default function UserSearch({ currentUser, selectedUsers, onAdd }) {
                   </button>
                 </li>
 
+                {/* divider */}
                 {i < suggestions.length - 1 && (
                   <div className="w-full">
                     <hr className="w-[80%] mx-auto border-t border-gray-300 my-0.5" />

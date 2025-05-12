@@ -10,6 +10,7 @@ export default function CreateChat() {
 
   return (
     <RequireAuth delay={700}>
+      {/* check for auth */}
       <div className="flex flex-col w-80 mx-auto pb-60">
         <h1 className="mt-6">Opret gruppe</h1>
         <p>

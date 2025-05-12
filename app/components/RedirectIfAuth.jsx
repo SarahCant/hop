@@ -10,6 +10,7 @@ export default function RedirectIfAuth({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    //redirect to chat overview if logged in
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         router.push("/");
@@ -21,6 +22,7 @@ export default function RedirectIfAuth({ children }) {
     return () => unsubscribe();
   }, [router]);
 
+  //loading spinner
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[var(--cta)]/45">

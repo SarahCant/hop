@@ -26,7 +26,7 @@ export default function ChatRoom() {
   const listRef = useRef(null);
   const endRef = useRef(null);
 
-  /* useRef to start at bottom */
+  //useRef to start at chat bottom
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "auto" });
   }, [messages]);
@@ -41,16 +41,9 @@ export default function ChatRoom() {
     const onAdd = (snap) => {
       const data = snap.val();
 
-      // fetch the user node, then process it in .then()
+      //fetch sender
       get(ref(database, `users/${data.sender}`))
         .then((userSnap) => {
-          //console.log(
-          //"Fetched user node for",
-          //data.sender,
-          //"→",
-          //userSnap.exists() ? userSnap.val() : null
-          // );
-
           const senderName = userSnap.exists()
             ? userSnap.val().username || userSnap.val().name || "Ukendt"
             : "Ukendt";
@@ -63,7 +56,7 @@ export default function ChatRoom() {
         })
         .catch((err) => {
           console.error("Error fetching user", data.sender, err);
-          // still add the message, just with a fallback name
+          //if err still add message just with a fallback name
           setMessages((prev) => [
             ...prev,
             { id: snap.key, ...data, senderName: "Ukendt" },
@@ -76,6 +69,7 @@ export default function ChatRoom() {
     return () => off(msgsRef, "child_added", onAdd);
   }, [chatId]);
 
+  //don't send if no message, no chatId or no currentUser
   const handleSend = async () => {
     if (!draft.trim() || !chatId || !currentUser) return;
     await sendMessage(chatId, currentUser.uid, draft);
@@ -84,9 +78,10 @@ export default function ChatRoom() {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* header */}
+      {/* header w/ banner */}
       <header className="shadow-lg ">
         <Link href="/" className="absolute top-[0.7rem] left-[0.2rem]">
+          {/* back btn */}
           <Image
             src="/img/icons/back-green.png"
             width={15}
@@ -97,11 +92,10 @@ export default function ChatRoom() {
           <p className="!text-[10px] -mt-1 !text-[var(--green)]">Chats</p>
         </Link>
 
+        {/* banner */}
         <Banner>
           <ChatName />
         </Banner>
-
-        <div className="w-1" />
       </header>
 
       {/* actual chat */}
@@ -148,18 +142,25 @@ export default function ChatRoom() {
             </>
           );
         })}
+
+        {/* useRef endRef to start at chat bottom */}
         <div ref={endRef} />
       </section>
 
+      {/* text input field */}
       <div className="p-4 border-t border-[var(--green)] flex items-center space-x-2">
         <input
           type="text"
           className="input flex-1 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--green)] focus:border-[var(--green)]"
           placeholder="Skriv besked..."
+          /* input value = draft */
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
+          /* clik on enter calls handleSend */
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
         />
+
+        {/* send btn */}
         <button
           onClick={handleSend}
           className="cta !bg-[var(--green)] !w-fit !px-[1.4rem]"

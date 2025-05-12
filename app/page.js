@@ -22,7 +22,7 @@ export default function ChatOverview() {
       .then((snap) => {
         const ids = snap.exists() ? Object.keys(snap.val()) : [];
 
-        //lastMsg and createdAt for each chat
+        //time of last msg and created for each chat
         return Promise.all(
           ids.map(async (chatId) => {
             const [createdSnap, lastMsgSnap] = await Promise.all([
@@ -46,7 +46,7 @@ export default function ChatOverview() {
         );
       })
 
-      //sort descending and store in state
+      //sort descending
       .then((list) => {
         list.sort((a, b) => b.timestamp - a.timestamp);
         setChatList(list);
@@ -67,17 +67,19 @@ export default function ChatOverview() {
   }
 
   return (
+    /* check for login w/ 0.7s delay */
     <RequireAuth delay={700}>
-      {/* <h1 className="text-center !pt-6 !pb-4 mb-3">SpilSammen Chats</h1> */}
-      <div className="shadow-lg">
+      <header className="shadow-lg">
         <Banner />
-      </div>
+      </header>
 
+      {/* import ChatItem and render for each chat */}
       <section className="pb-[30vw]">
         {chatList.map(({ chatId }, i) => (
           <React.Fragment key={chatId}>
             <ChatItem key={chatId} chatId={chatId} />
 
+            {/* border divider */}
             {i < chatList.length - 1 && (
               <div className="bg-[var(--bg)] w-full">
                 <hr className="w-[55%] mx-auto border-t border-gray-300 my-2" />

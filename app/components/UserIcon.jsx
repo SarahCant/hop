@@ -1,5 +1,5 @@
 export default function UserIcon({ name, className = "uicon" }) {
-  //convert user/group name's first character to uppercase, fallback '?'
+  //convert name's first character to uppercase
   const initial = name?.[0]?.toUpperCase();
 
   return (

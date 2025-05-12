@@ -4,7 +4,7 @@
 @import url("https://use.typekit.net/xyx5wta.css");
 @import url("href:https://use.typekit.net/xyx5wta.css");
 
-/* ROOT */
+/* --- ROOT --- */
 :root {
   --bg: #fefdff;
   --cta: #f5c518;
@@ -59,6 +59,7 @@ p {
   line-height: 1rem;
 }
 
+/* --- ERROR MESSAGES --- */
 .error {
   color: var(--red);
   font-size: 0.72rem;
@@ -75,7 +76,7 @@ p {
   /*  margin-left: -0.3em; */
 }
 
-/* login and registration inputs */
+/* LOGIN AND REG INPUTS */
 .input-logreg {
   margin-left: -0.3rem;
 }
@@ -145,11 +146,13 @@ p {
   border-radius: 15px;
 }
 
+/* LEFT END OF BANNER */
 .banner::before {
   left: 7vw;
   clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 25% 50%, 0% 0%);
 }
 
+/* RIGHT END OF BANNER */
 .banner::after {
   right: 7.4vw;
   left: auto;

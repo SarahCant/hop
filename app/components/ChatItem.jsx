@@ -14,6 +14,7 @@ export default function ChatItem({ chatId }) {
   const [senderName, setSenderName] = useState("");
 
   useEffect(() => {
+    //render nothing if no chatId
     if (!chatId) return;
 
     (async () => {
@@ -44,7 +45,7 @@ export default function ChatItem({ chatId }) {
       setLatestText(lastTxt);
       setTimestamp(lastTs || createdAt);
 
-      //sender’s username
+      //last message's sender
       if (lastSender) {
         const userSnap = await get(
           child(ref(database), `users/${lastSender}/username`)
@@ -56,13 +57,16 @@ export default function ChatItem({ chatId }) {
 
   return (
     <Link href={`/chat/${chatId}`}>
-      <main className="block">
+      <div className="block">
         <section className="flex justify-between p-4">
           <div className="flex items-center space-x-3 flex-1 min-w-0">
+            {/* chat's icon */}
             <UserIcon name={name} />
             <div className="flex flex-col ml-2 flex-1 min-w-0">
+              {/* chat name */}
               <h3 className="truncate">{name}</h3>
               <p className="-mt-[0.3rem] !text-xs !text-gray-600 truncate">
+                {/* latest message and it's sender : group created */}
                 {latestText
                   ? `${senderName} : ${latestText}`
                   : "Gruppe oprettet"}
@@ -70,12 +74,13 @@ export default function ChatItem({ chatId }) {
             </div>
           </div>
 
+          {/* latest message or creation timestamp */}
           <TimeStamp
             timestamp={timestamp}
             className="text-xs text-gray-500 whitespace-nowrap pt-[0.1vw] "
           />
         </section>
-      </main>
+      </div>
     </Link>
   );
 }

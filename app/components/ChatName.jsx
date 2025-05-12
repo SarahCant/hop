@@ -10,9 +10,11 @@ export default function ChatName({ className = "" }) {
   const [name, setName] = useState("");
 
   useEffect(() => {
+    //render nothing if there's no chatId
     if (!chatId) return;
 
     const fetchName = async () => {
+      //get chat name w/ fallback unknown chat
       try {
         const nameSnapshot = await get(
           child(ref(database), `chats/${chatId}/name`)

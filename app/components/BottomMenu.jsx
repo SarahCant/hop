@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { useAuth } from "../context/auth";
 import { logout } from "../firebase";
 import Image from "next/image";
 
 export default function BottomMenu() {
-  const { currentUser } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -40,6 +38,7 @@ export default function BottomMenu() {
           return (
             <li key={item.href} className="flex-1 flex justify-center">
               <Link href={item.href}>
+                {/* special styling of "create" */}
                 {isCreate ? (
                   <div className="flex flex-col items-center">
                     <div className=" -mt-10  ">
@@ -50,6 +49,8 @@ export default function BottomMenu() {
                         alt={item.label}
                       />
                     </div>
+
+                    {/* active vs non-active text */}
                     <span
                       className={`-mt-1 pb-2 text-xs border-b-2 border-[var(--active)] ${
                         isActive
@@ -70,6 +71,7 @@ export default function BottomMenu() {
                       ${item.extraClasses || ""}
                     `}
                   >
+                    {/* active vs non-active icon */}
                     <Image
                       src={isActive ? item.activeIcon : item.icon}
                       width={500}
@@ -87,6 +89,7 @@ export default function BottomMenu() {
         })}
 
         <li className="flex-1">
+          {/* logout and redirect to login */}
           <span
             onClick={() => {
               logout();

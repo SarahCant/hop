@@ -9,6 +9,7 @@ export default function NotFound() {
         <Banner />
       </div>
 
+      {/* info about missing page + links to alt places to check out */}
       <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
         <h1 className="leading-[2rem] text-center">Siden findes endnu ikke</h1>
         <p className="pt-2">

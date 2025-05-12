@@ -17,12 +17,14 @@ export default function Register() {
     e.preventDefault();
     setErrorMessage(null);
 
-    //error validating
+    //errors
+    //empty input fields
     if (!username || !email || !password) {
       setErrorMessage("Alle felter skal udfyldes før du kan fortsætte.");
       return;
     }
 
+    //terms and conditions
     if (!agreeTos) {
       setErrorMessage(
         "Du skal acceptere betingelserne for at kunne oprette en konto."
@@ -30,12 +32,16 @@ export default function Register() {
       return;
     }
 
+    //register a user w/ username, e-mail, and password
     try {
       await register(email, username, password);
       setUsername("");
       setEmail("");
       setPassword("");
+      //redirect to chat overview ("/")
       router.push("/");
+
+      //error handling
     } catch (err) {
       let msg = "Der var et problem med at oprette kontoen.";
       switch (err.code) {
@@ -57,11 +63,13 @@ export default function Register() {
 
   return (
     <RedirectIfAuth>
-      <div className="bg-[var(--cta)]/45 h-screen content-center">
+      {/* check if logged in already */}
+      <main className="bg-[var(--cta)]/45 h-screen content-center">
         <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
           <h1 className="-mt-3 mb-4 text-center">Opret konto</h1>
 
           {/* input fields */}
+          {/* name */}
           <form onSubmit={onSubmit}>
             <section>
               <label>Dit navn:</label>
@@ -74,6 +82,7 @@ export default function Register() {
               />
             </section>
 
+            {/* e-mail */}
             <section className="mt-8">
               <label>Din e-mail:</label>
               <input
@@ -85,6 +94,7 @@ export default function Register() {
               />
             </section>
 
+            {/* password */}
             <section className="mt-8">
               <label>Din adgangskode:</label>
               <input
@@ -96,7 +106,7 @@ export default function Register() {
               />
             </section>
 
-            {/* t&c*/}
+            {/* terms and conditions*/}
             <div className="flex mt-4 gap-0.5">
               <input
                 id="tos"
@@ -113,7 +123,7 @@ export default function Register() {
               </label>
             </div>
 
-            {/* error message */}
+            {/* error messages */}
             <div className="h-6">
               {errorMessage && <p className="error">{errorMessage}</p>}
             </div>
@@ -133,7 +143,7 @@ export default function Register() {
             </section>
           </form>
         </div>
-      </div>
+      </main>
     </RedirectIfAuth>
   );
 }

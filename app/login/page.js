@@ -26,12 +26,14 @@ export default function Login() {
 
   return (
     <RedirectIfAuth>
-      <div className="bg-[var(--cta)]/45 h-screen content-center ">
+      {/* check if logged in already */}
+      <main className="bg-[var(--cta)]/45 h-screen content-center ">
         <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
           <h1 className="-mt-3 mb-4 text-center">Log ind</h1>
 
           {/* input fields */}
           <form onSubmit={onSubmit}>
+            {/* e-mail */}
             <section>
               <label>Din mail:</label>
               <input
@@ -41,6 +43,8 @@ export default function Login() {
                 className="input input-logreg w-full"
               />
             </section>
+
+            {/* password */}
             <section className="mt-8">
               <label>Din adgangskode:</label>
               <input
@@ -71,7 +75,7 @@ export default function Login() {
             </section>
           </form>
         </div>
-      </div>
+      </main>
     </RedirectIfAuth>
   );
 }

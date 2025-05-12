@@ -24,24 +24,27 @@ export default function ChatCreation({ currentUser }) {
     setSelected((prev) => [...prev, user]);
   };
 
+  //remove selected
   const removeUser = (uid) => {
     setSelected((prev) => prev.filter((u) => u.uid !== uid));
   };
 
+  //only create if there's a group name and selected users
   const handleCreate = async () => {
     if (!groupName || selected.length === 0) return;
     const chatId = await createGroupChat(currentUser, selected, groupName);
 
-    //reset state
+    //reset state/clear fields
     setSelected([]);
     setGroupName("");
 
-    //navigate to the new chat
+    //navigate to chatroom
     router.push(`/chat/${chatId}`);
   };
 
   return (
     <RequireAuth delay={700}>
+      {/* check for currentUser */}
       <section className="flex flex-col gap-12 w-80 mx-auto mt-8">
         {/* group name input */}
         <section className="flex flex-col pt-2">
@@ -59,10 +62,13 @@ export default function ChatCreation({ currentUser }) {
             maxLength="20"
             required
           />
+          {/* max-length UI */}
           <p className="!text-xs text-right pr-2 !text-gray-400 pt-1">
-            {groupName.length}/15
+            {groupName.length}/20
           </p>
         </section>
+
+        {/* chat banner displaying groupName input */}
         <div className="relative self-center -top-6.5 -mb-3">
           <Banner name={groupName ? groupName : " "} />
         </div>
@@ -88,16 +94,19 @@ export default function ChatCreation({ currentUser }) {
                   exit={{ opacity: 0, y: 5 }}
                   className="flex justify-between w-80 mx-auto p-2 bg-[var(--blue)]/40 "
                 >
+                  {/* selected's info */}
                   <div className="flex flex-col">
                     <p className="">{u.username}</p>
                     <p className="!text-[11px] text-gray-600 -mt-1">
                       {u.email}
                     </p>
                   </div>
+
+                  {/* remove btn */}
                   <button onClick={() => removeUser(u.uid)}> X </button>
                 </motion.li>
 
-                {/* border between the selected users */}
+                {/* divider */}
                 {i < selected.length - 1 && (
                   <div className="bg-[var(--blue)]/40 w-full">
                     <hr className="w-[80%] mx-auto border-t border-gray-400 " />
@@ -108,14 +117,15 @@ export default function ChatCreation({ currentUser }) {
           </AnimatePresence>
         </ul>
       ) : (
+        /* alt text if no selected yet */
         <p className="text-gray-500 italic pt-2">
           Du har ikke tilføjet nogle medlemmer endnu.
         </p>
       )}
-
       {/* "create" btn */}
       <button
         onClick={handleCreate}
+        /* disable if no group name or members */
         disabled={!groupName || selected.length === 0}
         className={`cta fixed bottom-25 right-4 !w-fit !text-[1.1rem] ${
           groupName && selected.length > 0
