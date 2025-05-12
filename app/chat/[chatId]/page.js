@@ -154,7 +154,7 @@ export default function ChatRoom() {
       <div className="p-4 border-t border-[var(--green)] flex items-center space-x-2">
         <input
           type="text"
-          className="flex-1 rounded-full px-4 py-2 focus:outline-none focus:ring input"
+          className="input flex-1 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--green)] focus:border-[var(--green)]"
           placeholder="Skriv besked..."
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
@@ -162,9 +162,14 @@ export default function ChatRoom() {
         />
         <button
           onClick={handleSend}
-          className="bg-[var(--green)] text-[var(--bg)] font-medium rounded-full px-4 py-2"
+          className="cta !bg-[var(--green)] !w-fit !px-[1.4rem]"
         >
-          Send
+          <Image
+            src="/img/icons/send-btn.png"
+            width={25}
+            height={25}
+            alt="Send besked"
+          />
         </button>
       </div>
     </div>

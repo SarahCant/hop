@@ -80,7 +80,7 @@ export default function ChatOverview() {
 
             {i < chatList.length - 1 && (
               <div className="bg-[var(--bg)] w-full">
-                <hr className="w-[55%] mx-auto border-t border-gray-300 my-3" />
+                <hr className="w-[55%] mx-auto border-t border-gray-300 my-2" />
               </div>
             )}
           </React.Fragment>

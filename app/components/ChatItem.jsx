@@ -56,13 +56,13 @@ export default function ChatItem({ chatId }) {
 
   return (
     <Link href={`/chat/${chatId}`}>
-      <section className="block">
-        <div className="flex items-center justify-between p-4">
+      <main className="block">
+        <section className="flex justify-between p-4">
           <div className="flex items-center space-x-3 flex-1 min-w-0">
             <UserIcon name={name} />
             <div className="flex flex-col ml-2 flex-1 min-w-0">
-              <h2 className="truncate">{name}</h2>
-              <p className="-mt-1 text-sm text-gray-600 truncate">
+              <h3 className="truncate">{name}</h3>
+              <p className="-mt-[0.3rem] !text-xs !text-gray-600 truncate">
                 {latestText
                   ? `${senderName} : ${latestText}`
                   : "Gruppe oprettet"}
@@ -72,10 +72,10 @@ export default function ChatItem({ chatId }) {
 
           <TimeStamp
             timestamp={timestamp}
-            className="text-xs text-gray-500 whitespace-nowrap"
+            className="text-xs text-gray-500 whitespace-nowrap pt-[0.1vw] "
           />
-        </div>
-      </section>
+        </section>
+      </main>
     </Link>
   );
 }
