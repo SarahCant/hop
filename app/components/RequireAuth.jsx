@@ -19,7 +19,7 @@ export default function RequireAuth({ children, delay = 700 }) {
     }
   }, [currentUser, loading, router, delay]);
 
-  //if loading
+  //loading spinner
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[var(--bg)]">
