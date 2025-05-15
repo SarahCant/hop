@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
+  reactStrictMode: true,
   env: {
     apiKey: process.env.apiKey,
     authDomain: process.env.authDomain,
