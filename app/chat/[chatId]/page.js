@@ -83,7 +83,7 @@ export default function ChatRoom() {
         <Link href="/" className="absolute top-[0.7rem] left-[0.2rem]">
           {/* back btn */}
           <Image
-            src="./img/icons/back-green.png"
+            src="/img/icons/back-green.png"
             width={15}
             height={15}
             alt="Tilbage"
@@ -166,7 +166,7 @@ export default function ChatRoom() {
           className="cta !bg-[var(--green)] !w-fit !px-[1.4rem]"
         >
           <Image
-            src="./img/icons/send-btn.png"
+            src="/img/icons/send-btn.png"
             width={25}
             height={25}
             alt="Send besked"
