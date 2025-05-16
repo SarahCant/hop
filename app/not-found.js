@@ -10,7 +10,7 @@ export default function NotFound() {
       </div>
 
       {/* info about missing page + links to alt places to check out */}
-      <div className="form-page w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
+      <div className="!form-page w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
         <h1 className="leading-[2rem] text-center">Siden findes endnu ikke</h1>
         <p className="pt-2">
           Tak for din interesse! Siden findes desværre ikke endnu, men prøv
