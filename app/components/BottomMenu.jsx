@@ -12,20 +12,20 @@ export default function BottomMenu() {
     {
       href: "/create-chat",
       label: "Opret chat",
-      icon: "/img/icons/create.png",
-      activeIcon: "/img/icons/create.png",
+      icon: "./img/icons/create.png",
+      activeIcon: "./img/icons/create.png",
     },
     {
       href: "/",
       label: "Alle chats",
-      icon: "/img/icons/all-chats.png",
-      activeIcon: "/img/icons/all-chats-active.png",
+      icon: "./img/icons/all-chats.png",
+      activeIcon: "./img/icons/all-chats-active.png",
     },
     {
       href: "/settings",
       label: "Indstillinger",
-      icon: "/img/icons/settings.png",
-      activeIcon: "/img/icons/settings-active.png",
+      icon: "./img/icons/settings.png",
+      activeIcon: "./img/icons/settings-active.png",
     },
   ];
 
@@ -98,7 +98,7 @@ export default function BottomMenu() {
             className="flex flex-col items-center justify-center py-2"
           >
             <Image
-              src="/img/icons/logout.png"
+              src="./img/icons/logout.png"
               width={500}
               height={500}
               alt="menu icon"
