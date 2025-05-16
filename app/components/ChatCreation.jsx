@@ -123,18 +123,20 @@ export default function ChatCreation({ currentUser }) {
         </p>
       )}
       {/* "create" btn */}
-      <button
-        onClick={handleCreate}
-        /* disable if no group name or members */
-        disabled={!groupName || selected.length === 0}
-        className={`cta fixed bottom-25 right-4 !w-fit !text-[1.1rem] ${
-          groupName && selected.length > 0
-            ? "opacity-100"
-            : "opacity-40 cursor-not-allowed"
-        }`}
-      >
-        OPRET
-      </button>
+      <div className="w-fit h-fit rounded-4xl bg-[var(--bg)] fixed bottom-25 right-4 ">
+        <button
+          onClick={handleCreate}
+          /* disable if no group name or members */
+          disabled={!groupName || selected.length === 0}
+          className={`cta !w-fit !text-[1.1rem] ${
+            groupName && selected.length > 0
+              ? "opacity-100"
+              : "opacity-40 cursor-not-allowed"
+          }`}
+        >
+          OPRET
+        </button>{" "}
+      </div>
     </RequireAuth>
   );
 }

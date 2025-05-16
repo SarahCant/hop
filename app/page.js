@@ -69,12 +69,12 @@ export default function ChatOverview() {
   return (
     /* check for login w/ 0.7s delay */
     <RequireAuth delay={700}>
-      <header className="shadow-lg">
-        <Banner />
+      <header className="shadow-lg fixed bg-[var(--bg)]">
+        <Banner className="" />
       </header>
 
       {/* import ChatItem and render for each chat */}
-      <section className="pb-[30vw]">
+      <section className="pb-[30vw] pt-[6rem]">
         {chatList.map(({ chatId }, i) => (
           <React.Fragment key={chatId}>
             <ChatItem key={chatId} chatId={chatId} />
