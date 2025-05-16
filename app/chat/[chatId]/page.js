@@ -122,7 +122,7 @@ export default function ChatRoom() {
 
       {/* actual chat */}
       {/* check for current user and different msg styling if so */}
-      <section className="flex-1 overflow-auto px-4 py-2 space-y-9">
+      <section className="flex-1 overflow-auto px-4 py-2 space-y-9 pt-[6.5rem]">
         {messagesWithFlags.map((m) => {
           const isMe = m.sender === currentUser?.uid;
           return (
