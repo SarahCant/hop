@@ -24,14 +24,15 @@ import {
 
 //firebase config
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_apiKey,
-  authDomain: process.env.NEXT_PUBLIC_authDomain,
-  databaseURL: process.env.NEXT_PUBLIC_databaseURL,
-  projectId: process.env.NEXT_PUBLIC_projectId,
-  storageBucket: process.env.NEXT_PUBLIC_storageBucket,
-  messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
-  appId: process.env.NEXT_PUBLIC_appId,
-  measurementId: process.env.NEXT_PUBLIC_measurementId,
+  apiKey: "AIzaSyAEEQCXQjuWF2JMAXpJBxXSOqVlv5OCBww",
+  authDomain: "hop25-4f4b5.firebaseapp.com",
+  databaseURL:
+    "https://hop25-4f4b5-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "hop25-4f4b5",
+  storageBucket: "hop25-4f4b5.firebasestorage.app",
+  messagingSenderId: "550491449235",
+  appId: "1:550491449235:web:158b66a0272d4565e8aa66",
+  measurementId: "G-NFM20JB5GX",
 };
 
 const app = initializeApp(firebaseConfig);
