@@ -27,7 +27,7 @@ export default function Login() {
   return (
     <RedirectIfAuth>
       {/* check if logged in already */}
-      <main className="bg-[var(--cta)]/45 h-screen content-center ">
+      <main className="form-page bg-[var(--cta)]/45 h-screen content-center ">
         <div className="w-8/10 flex flex-col mx-auto p-8 bg-[var(--bg)] rounded-4xl">
           <h1 className="-mt-3 mb-4 text-center">Log ind</h1>
 

@@ -161,3 +161,9 @@ p {
   transform: scaleX(90deg);
   clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 0 100%, 0% 50%, 0 0);
 }
+
+/* -- FORM PAGES -- */
+/* LOG IN, REGISTER, 404 */
+.form-page {
+  padding-top: 10%;
+}
