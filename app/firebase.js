@@ -13,7 +13,6 @@ import {
   set,
   query,
   orderByChild,
-  equalTo,
   get,
   push,
   update,
