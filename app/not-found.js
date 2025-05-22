@@ -18,7 +18,7 @@ export default function NotFound() {
         </p>
         <div className="flex  flex-col items-center gap-4 pt-[4vh] ">
           <button className="cta">
-            <Link href="login">LOGIN</Link>
+            <Link href="login">LOG IND</Link>
           </button>
           <button className="cta">
             <Link href="register">OPRET KONTO</Link>
